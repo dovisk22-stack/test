@@ -11,7 +11,7 @@ import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
 
 const sources = [
-  { id: "DfINGVPjX1y", type: "Solar PV and battery storage installation" },
+  { id: "DfDB9s5Chxu", type: "Solar battery and inverter installation in progress" },
   { id: "De_mqQqiJ9Y", type: "FuseBox consumer unit replacement" },
   { id: "De2Gaiul9aM", type: "Ohme Home Pro EV charger installation" },
   { id: "DezeabAE1u0", type: "Dimplex Quantum storage heater upgrade" },

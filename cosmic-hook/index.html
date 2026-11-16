@@ -165,6 +165,73 @@
 @keyframes auraBreathe{50%{transform:scale(1.12);opacity:.48}}
 @keyframes auraRotate{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.skin-aura,.skin-aura:before,.skin-aura:after,.anime-skin svg{animation:none}}
+
+/* VISUAL REVISION // angular sci-fi UI, authentic controls, no glossy bubble style */
+:root{--violet:#8c74be;--pink:#bd92d3;--cyan:#87b9d2;--ink:#070b12;--white:#edf1f7}
+html,body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;background:#05080e}
+#homeScreen{background:#05080e}
+#homeScreen .menu-stage{filter:brightness(.57) saturate(.69) contrast(1.18);background-position:center top}
+#homeScreen .menu:before{content:"";pointer-events:none;position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,transparent 0%,#04070a18 29%,#05080b50 43%,#070a10ed 57%,#070a10fa 100%)}
+#homeScreen .menu-stage:before{animation:none}
+#homeScreen .menu-stage:after{animation:none;display:none}
+#homeScreen .cosmic-stars span{width:1px;height:1px;box-shadow:0 0 4px #f5f6ff;animation-duration:5s}
+#homeScreen .menu-stats{z-index:5;left:5%;right:5%;top:max(2.5%,env(safe-area-inset-top));gap:10px}
+#homeScreen .menu-stat{border-radius:8px;height:clamp(38px,5.4dvh,50px);border:1px solid #d6e2f42f;box-shadow:none;background:#071019d8;padding:5px 10px;max-width:48%;gap:7px}
+#homeScreen .menu-stat .symbol{font-size:18px;color:#b7bfd0;text-shadow:none}
+#homeScreen .menu-stat strong{font-size:13px;letter-spacing:1px;text-shadow:none}
+#homeScreen .menu-stat small{font-size:8px;color:#a7b4c9;letter-spacing:1px}
+#homeScreen .menu-stat.dust strong{font-size:14px}
+#homeScreen .menu-copy{position:absolute;z-index:4;top:43%;left:8%;right:8%;text-align:left;pointer-events:none}
+#homeScreen .menu-kicker{font-size:9px;letter-spacing:2px;font-weight:800;color:#a3b2c9}
+#homeScreen .menu-copy p{font-size:clamp(13px,3.5vw,18px);font-weight:800;color:#e8eefb;letter-spacing:1.3px;line-height:1.55;margin:7px 0 0;text-shadow:0 2px 6px #05080e}
+#homeScreen .menu-copy strong{color:#c7a7ff;font-size:clamp(13px,3.2vw,17px)}
+#homeScreen .moon-feature{position:absolute;z-index:6;top:53%;left:7%;width:86%;height:7%;display:flex;align-items:center;gap:10px;padding:6px 11px;border:1px solid #b7c8da63;border-left:3px solid #c2d6ef;border-radius:7px;background:linear-gradient(100deg,#141a23f7,#080c11f9);box-shadow:none;text-align:left;color:#f0f4ff;cursor:pointer;transition:border-color .2s,transform .16s}
+#homeScreen .moon-feature:active{transform:scale(.98)}
+#homeScreen .moon-feature .moon-icon{font:normal clamp(26px,5dvh,42px)/1 Georgia,serif;color:#cdd7eb;filter:drop-shadow(0 0 6px #afc5d75e)}
+#homeScreen .moon-feature>span:nth-child(2){flex:1;min-width:0}
+#homeScreen .moon-feature small{display:block;font-size:8px;letter-spacing:1.2px;color:#91a0b4;font-weight:800;white-space:nowrap}
+#homeScreen .moon-feature b{display:block;font-size:13px;letter-spacing:1px;margin-top:2px}
+#homeScreen .moon-desc{font-weight:500;color:#a7b6ca;font-size:9px}
+#homeScreen .moon-arrow{font-size:25px;font-weight:300;color:#d7deed}
+#homeScreen .menu-tap{display:flex;align-items:center;justify-content:center;z-index:6!important;outline-offset:2px;border-radius:8px!important;color:#eef4ff!important;font-size:clamp(11px,3.1vw,15px)!important;font-family:inherit;font-weight:800;letter-spacing:1.5px;transition:transform .15s ease,border-color .15s,background .15s;text-shadow:none}
+#homeScreen .menu-tap:hover,#homeScreen .menu-tap:focus-visible{box-shadow:none;outline:2px solid #d1dafa}
+#homeScreen .menu-tap:active{background:#29384e!important;transform:scale(.98)}
+#homeScreen #playBtn{top:62%;left:7%;width:86%;height:7.3%;border:1px solid #c8b3f66b;border-radius:8px!important;background:linear-gradient(120deg,#604a95,#8265ad);box-shadow:0 7px 22px #08041450;animation:none!important;font-size:17px!important}
+#homeScreen #levelsBtn,#homeScreen #skinsBtn,#homeScreen #missionsBtn{top:71%;height:7%;width:27%;border:1px solid #9bacc73f;background:#101721;box-shadow:none;font-size:11px!important}
+#homeScreen #levelsBtn{left:7%}#homeScreen #skinsBtn{left:36.5%}#homeScreen #missionsBtn{left:66%}
+#homeScreen .menu-world{top:80.7%!important;height:9.6%!important;border-radius:7px!important;border:1px solid #c1cbd33a;background:linear-gradient(180deg,#182333,#0e141d);box-shadow:none;display:flex;flex-direction:column;gap:2px;letter-spacing:.6px;font-size:8px!important;color:#d6ddea!important}
+#homeScreen .menu-world:before{font-family:Georgia,serif;font-size:clamp(18px,3.7dvh,29px);line-height:1.2;display:block;font-weight:400;color:#dde7fb}
+#homeScreen .menu-world.w1:before{content:"♁";color:#77aace}
+#homeScreen .menu-world.w2:before{content:"☾";color:#dadde9}
+#homeScreen .menu-world.w3:before{content:"♂";color:#c88a72}
+#homeScreen .menu-world.w4:before{content:"♃";color:#c89f7d}
+#homeScreen .menu-world.w5:before{content:"♄";color:#e8c7a1}
+#homeScreen .menu-world.w1{left:7%;width:16%}#homeScreen .menu-world.w2{left:24.5%;width:16%}#homeScreen .menu-world.w3{left:42%;width:16%}#homeScreen .menu-world.w4{left:59.5%;width:16%}#homeScreen .menu-world.w5{left:77%;width:16%}
+#homeScreen #worldPrevBtn,#homeScreen #worldNextBtn{display:none}
+#homeScreen .menu-equipped{z-index:5;bottom:2.5%;max-width:94%;overflow:hidden;text-overflow:ellipsis;border:0;background:none;box-shadow:none;border-radius:0;color:#b7a5cf;letter-spacing:1.05px;font-size:9px}
+.btn,.icon-btn,.counter,.glass,.toggle,.stage-chip{border-radius:8px}
+.btn{background-image:none;font-weight:800;letter-spacing:1.2px}
+.btn-primary{background:#654a93;box-shadow:none;border:1px solid #a58cda}
+.btn-primary:before{display:none}
+.btn-secondary{background:#111824;border:1px solid #66748953;box-shadow:none}
+.glass{background:#0d141de9;border-color:#96a4b33b;box-shadow:0 20px 55px #0009}
+#levelsScreen,#skinsScreen,#missionsScreen{background:linear-gradient(150deg,#050910f2,#0b121cf5)}
+#levelsScreen .selector,#skinsScreen .selector,#missionsScreen .selector{background:#0c121aef;border:1px solid #8995a84f;box-shadow:0 20px 70px #000a;border-radius:11px}
+.selector h2{font-weight:850;letter-spacing:-.3px;text-shadow:none}
+.selector-top button{background:#18212d;border:1px solid #899bb24e;border-radius:7px}
+.tiny-top{border-radius:5px;border-color:#8493aa4e;background:#19212d7a;letter-spacing:1.4px;box-shadow:none}
+.world-card,.skin-card{background:linear-gradient(145deg,#17202a,#0d121a);border:1px solid #79889b66;border-radius:9px;box-shadow:none}
+.world-card.active,.skin-card.equipped{border-color:#bdabd8;box-shadow:0 0 0 1px #af9ac7}
+.world-card:hover,.skin-card:hover{box-shadow:0 0 0 1px #b29bc5}
+.world-orb{box-shadow:inset -12px -8px 15px #03030bce,0 0 12px #131c27;border:1px solid #ffffff25}
+.anime-skin{border-radius:9px}
+.skin-aura{opacity:.17;filter:saturate(.75)}
+.skin-aura:before,.skin-aura:after{box-shadow:0 0 12px var(--aura-color);border-width:1.4px}
+.mission-row{border-radius:7px;border-color:#798aa044;background:#131b27}
+.mission-award{border-radius:7px;border-color:#798aa044;background:#0a1017}
+@media(max-height:680px){#homeScreen .menu-copy{top:41%}#homeScreen .moon-feature{top:51%}#homeScreen #playBtn{top:61%}#homeScreen #levelsBtn,#homeScreen #skinsBtn,#homeScreen #missionsBtn{top:69%}#homeScreen .menu-world{top:78%!important}#homeScreen .menu-equipped{bottom:1%}}
+@media(prefers-reduced-motion:reduce){#homeScreen .cosmic-stars span{animation:none}}
+
 </style>
 <link rel="stylesheet" href="polish.css?v=3">
 <style>#copyright{display:none!important}</style>
@@ -185,15 +252,17 @@
   <div class="menu"><div class="menu-stage" role="img" aria-label="Cosmic Hook galaxy artwork with Jupiter, the Sun, Saturn, Earth and purple astronaut"></div>
   <div class="cosmic-stars" id="menuSparks" aria-hidden="true"></div>
   <div class="menu-stats"><div class="menu-stat"><span class="symbol">✧</span><span><strong id="menuLevel">LEVEL 01</strong><small id="menuXp">0 / 1,000 XP</small></span></div><div class="menu-stat dust"><span class="symbol">✦</span><span><small>STAR DUST</small><strong id="menuDust">0</strong></span></div></div>
-  <button class="menu-tap" id="playBtn" aria-label="Play Cosmic Hook">PLAY</button>
+  <div class="menu-copy"><div class="menu-kicker">INTERSTELLAR SWING ARCADE // 01</div><p>MASTER THE HOOK.<br><strong>EXPLORE THE SOLAR SYSTEM.</strong></p></div>
+  <button class="moon-feature" id="moonFeatureBtn" aria-label="Explore Moon world"><span class="moon-icon">☾</span><span><small>NEXT DESTINATION · WORLD 02</small><b>THE MOON <span class="moon-desc">LUNAR ECLIPSE</span></b></span><span class="moon-arrow">›</span></button>
+  <button class="menu-tap" id="playBtn" aria-label="Play Cosmic Hook">▶ &nbsp; PLAY</button>
   <button class="menu-tap" id="levelsBtn" aria-label="Choose worlds">WORLDS</button>
   <button class="menu-tap" id="skinsBtn" aria-label="Choose astronaut characters">SKINS</button>
   <button class="menu-tap" id="missionsBtn" aria-label="View missions">MISSIONS</button>
   <button class="menu-tap menu-world w1" data-map="1" aria-label="Earth world">EARTH</button>
-  <button class="menu-tap menu-world w2" data-map="2" aria-label="Mars world">MARS</button>
-  <button class="menu-tap menu-world w3" data-map="3" aria-label="Jupiter world">JUPITER</button>
-  <button class="menu-tap menu-world w4" data-map="4" aria-label="Saturn world">SATURN</button>
-  <button class="menu-tap menu-world w5" data-map="8" aria-label="Void world">VOID</button>
+  <button class="menu-tap menu-world w2" data-map="2" aria-label="Moon world">MOON</button>
+  <button class="menu-tap menu-world w3" data-map="3" aria-label="Mars world">MARS</button>
+  <button class="menu-tap menu-world w4" data-map="4" aria-label="Jupiter world">JUPITER</button>
+  <button class="menu-tap menu-world w5" data-map="5" aria-label="Saturn world">SATURN</button>
   <button class="menu-tap" id="worldPrevBtn" aria-label="Previous world">PREVIOUS</button><button class="menu-tap" id="worldNextBtn" aria-label="Next world">NEXT</button>
   <div class="menu-equipped" id="menuEquipped">✦ NOVA EXPLORER EQUIPPED</div>
   </div></section>
@@ -202,7 +271,7 @@
 <section class="screen hidden" id="failScreen" aria-label="Try again"><div class="modal glass"><div class="glyph">☄</div><h2>LOST IN SPACE</h2><p>Missed your orbit. Grab a glowing anchor and swing again!</p><button class="btn btn-primary" id="retryBtn">↻ &nbsp; TRY AGAIN</button><button class="btn btn-secondary" id="failHomeBtn">⌂ &nbsp; MAIN MENU</button></div></section>
 <section class="screen hidden" id="levelsScreen" aria-label="World selection"><div class="selector">
   <div class="selector-top"><div class="tiny-top">✦ &nbsp; THE COSMIC MAP</div><button id="backLevelsBtn" aria-label="Back to main menu">✕</button></div>
-  <h2>EXPLORE WORLDS</h2><p class="subline">Eight cinematic planets and galaxies. Clear a level to unlock the next world.</p>
+  <h2>EXPLORE WORLDS</h2><p class="subline">Eight cinematic worlds, including Earth's Moon. Complete each map to unlock the next.</p>
   <div class="world-cards" id="levelGrid"></div><div class="selector-footer">Tap an unlocked world to launch your mission.</div></div></section>
 <section class="screen hidden" id="skinsScreen" aria-label="Astronaut characters"><div class="selector">
   <div class="selector-top"><div class="tiny-top">✦ &nbsp; COSMIC CHARACTER LOCKER</div><button id="backSkinsBtn" aria-label="Back to main menu">✕</button></div>
@@ -235,25 +304,26 @@ try{const s=JSON.parse(localStorage.getItem('cosmic-hook-save')||'{}');unlocked=
 
 const WORLDS=[
  {name:'EARTH',area:'BLUE ORBIT',light:'#6fefff',main:'#1278ca',dark:'#09245d',glow:'#4eafff',sky:['#030d26','#0b2351','#05091d']},
+ {name:'MOON',area:'LUNAR ECLIPSE',light:'#ebeeff',main:'#98a5be',dark:'#33365f',glow:'#a8bfff',sky:['#05080d','#121822','#02050b']},
  {name:'MARS',area:'RED EXPANSE',light:'#ffc29b',main:'#df6847',dark:'#52202b',glow:'#ff604d',sky:['#210913','#44132a','#10081b']},
  {name:'JUPITER',area:'THE GREAT STORM',light:'#ffcea8',main:'#c96052',dark:'#52233f',glow:'#ff7c74',sky:['#220713','#401026','#090217']},
  {name:'SATURN',area:'RING REALM',light:'#ffe4ab',main:'#aa74ba',dark:'#3c265a',glow:'#d29dff',sky:['#190b2c','#36244e','#09051d']},
  {name:'SUN',area:'SOLAR FLARE',light:'#fff4a7',main:'#ff9933',dark:'#b62d18',glow:'#ff6e24',sky:['#250a0c','#49101f','#13030f']},
  {name:'NEPTUNE',area:'DEEP BLUE',light:'#a3f6ff',main:'#286be3',dark:'#182466',glow:'#3aa8ff',sky:['#060e34','#182359','#040920']},
- {name:'MOON',area:'LUNAR ECLIPSE',light:'#ebeeff',main:'#98a5be',dark:'#33365f',glow:'#a8bfff',sky:['#090b22','#272043','#080818']},
  {name:'VOID',area:'DARK CORE',light:'#e79aff',main:'#721dd3',dark:'#1d0750',glow:'#ba36ff',sky:['#0c0319','#200437','#04010c']}
 ];
 const SKINS=[
  {name:'NOVA EXPLORER',accent:'#be71ff',edge:'#f0baff',visor:'#9d48f8',req:1,world:'GALAXY',symbol:'✦'},
  {name:'ASTRO BLUE',accent:'#39baff',edge:'#a1f8ff',visor:'#0568df',req:1,world:'EARTH',symbol:'⌁'},
- {name:'CRIMSON RIDER',accent:'#fa5979',edge:'#ffc2b5',visor:'#971d62',req:2,world:'MARS',symbol:'✧'},
- {name:'STORM WALKER',accent:'#ff9b69',edge:'#ffd4b6',visor:'#95264c',req:3,world:'JUPITER',symbol:'◈'},
- {name:'RING SENTINEL',accent:'#e7a5e4',edge:'#fff2bb',visor:'#8c509d',req:4,world:'SATURN',symbol:'◎'},
- {name:'SOLAR KNIGHT',accent:'#ffbd4b',edge:'#fff5c3',visor:'#b44720',req:5,world:'SUN',symbol:'☀'},
- {name:'DEEP PHANTOM',accent:'#5ed3ff',edge:'#f0ecff',visor:'#183d9f',req:6,world:'NEPTUNE',symbol:'❖'},
- {name:'VOID EMPEROR',accent:'#c436ff',edge:'#fb9dff',visor:'#25045d',req:8,world:'VOID',symbol:'✵'}
+ {name:'CRIMSON RIDER',accent:'#fa5979',edge:'#ffc2b5',visor:'#971d62',req:3,world:'MARS',symbol:'✧'},
+ {name:'STORM WALKER',accent:'#ff9b69',edge:'#ffd4b6',visor:'#95264c',req:4,world:'JUPITER',symbol:'◈'},
+ {name:'RING SENTINEL',accent:'#e7a5e4',edge:'#fff2bb',visor:'#8c509d',req:5,world:'SATURN',symbol:'◎'},
+ {name:'SOLAR KNIGHT',accent:'#ffbd4b',edge:'#fff5c3',visor:'#b44720',req:6,world:'SUN',symbol:'☀'},
+ {name:'DEEP PHANTOM',accent:'#5ed3ff',edge:'#f0ecff',visor:'#183d9f',req:7,world:'NEPTUNE',symbol:'❖'},
+ {name:'VOID EMPEROR',accent:'#c436ff',edge:'#fb9dff',visor:'#25045d',req:8,world:'VOID',symbol:'✵'},
+ {name:'LUNAR WRAITH',accent:'#99acdb',edge:'#f0f5ff',visor:'#435171',req:2,world:'MOON',symbol:'☾'}
 ];
-const SKILL_PERKS=[{"aura":"Violet starlight","ability":"Star Magnet","description":"Pulls nearby stars into your orbit","magnet":18,"bounce":1,"release":0,"gravity":1,"grapple":0,"swing":0,"maxSpeed":0,"shield":0},{"aura":"Azure lightning","ability":"Blue Jetpack","description":"Stronger bounce-pad launches","magnet":0,"bounce":1.22,"release":0,"gravity":1,"grapple":0,"swing":0,"maxSpeed":0,"shield":0},{"aura":"Crimson fire","ability":"Blazing Dash","description":"More forward speed when you release","magnet":0,"bounce":1,"release":75,"gravity":1,"grapple":0,"swing":0,"maxSpeed":45,"shield":0},{"aura":"Storm lightning","ability":"Storm Reach","description":"Grab distant grapple points","magnet":0,"bounce":1,"release":0,"gravity":1,"grapple":90,"swing":0,"maxSpeed":0,"shield":0},{"aura":"Orbiting rings","ability":"Saturn Guard","description":"Blocks one obstacle hit each attempt","magnet":0,"bounce":1,"release":0,"gravity":1,"grapple":0,"swing":0,"maxSpeed":0,"shield":1},{"aura":"Solar flames","ability":"Solar Launch","description":"Powerful vertical launch from bounce pads","magnet":0,"bounce":1.38,"release":0,"gravity":1,"grapple":0,"swing":0,"maxSpeed":0,"shield":0},{"aura":"Frost mist","ability":"Low Gravity","description":"Float farther through the air","magnet":0,"bounce":1,"release":0,"gravity":0.78,"grapple":0,"swing":0,"maxSpeed":0,"shield":0},{"aura":"Shadow vortex","ability":"Void Surge","description":"Swing harder and release faster","magnet":0,"bounce":1,"release":90,"gravity":1,"grapple":30,"swing":155,"maxSpeed":100,"shield":0}];
+const SKILL_PERKS=[{"aura":"Violet starlight","ability":"Star Magnet","description":"Pulls nearby stars into your orbit","magnet":18,"bounce":1,"release":0,"gravity":1,"grapple":0,"swing":0,"maxSpeed":0,"shield":0},{"aura":"Azure lightning","ability":"Blue Jetpack","description":"Stronger bounce-pad launches","magnet":0,"bounce":1.22,"release":0,"gravity":1,"grapple":0,"swing":0,"maxSpeed":0,"shield":0},{"aura":"Crimson fire","ability":"Blazing Dash","description":"More forward speed when you release","magnet":0,"bounce":1,"release":75,"gravity":1,"grapple":0,"swing":0,"maxSpeed":45,"shield":0},{"aura":"Storm lightning","ability":"Storm Reach","description":"Grab distant grapple points","magnet":0,"bounce":1,"release":0,"gravity":1,"grapple":90,"swing":0,"maxSpeed":0,"shield":0},{"aura":"Orbiting rings","ability":"Saturn Guard","description":"Blocks one obstacle hit each attempt","magnet":0,"bounce":1,"release":0,"gravity":1,"grapple":0,"swing":0,"maxSpeed":0,"shield":1},{"aura":"Solar flames","ability":"Solar Launch","description":"Powerful vertical launch from bounce pads","magnet":0,"bounce":1.38,"release":0,"gravity":1,"grapple":0,"swing":0,"maxSpeed":0,"shield":0},{"aura":"Frost mist","ability":"Low Gravity","description":"Float farther through the air","magnet":0,"bounce":1,"release":0,"gravity":0.78,"grapple":0,"swing":0,"maxSpeed":0,"shield":0},{"aura":"Shadow vortex","ability":"Void Surge","description":"Swing harder and release faster","magnet":0,"bounce":1,"release":90,"gravity":1,"grapple":30,"swing":155,"maxSpeed":100,"shield":0},{"aura":"Lunar frost","ability":"Moon Drift","description":"Float longer under reduced gravity","magnet":0,"bounce":1,"release":0,"gravity":0.83,"grapple":15,"swing":0,"maxSpeed":0,"shield":0}];
 let equippedSkin=0,starDust=0,totalWins=0,totalCollected=0,shieldCharges=0;
 try{const s=JSON.parse(localStorage.getItem('cosmic-hook-save')||'{}');equippedSkin=clamp(s.equippedSkin||0,0,SKINS.length-1);starDust=Math.max(0,s.starDust||0);totalWins=Math.max(0,s.totalWins||0);totalCollected=Math.max(0,s.totalCollected||0);if(SKINS[equippedSkin].req>unlocked)equippedSkin=0}catch(e){}
 function save(){try{localStorage.setItem('cosmic-hook-save',JSON.stringify({unlocked,bestScore,soundOn,equippedSkin,starDust,totalWins,totalCollected}));}catch(e){}}
@@ -318,14 +388,15 @@ function astronautSVG(s,i){const uid='suit'+i;return `<svg viewBox="0 0 140 142"
 function chooseSkins(){mode='skins';const g=$('skinGrid');g.innerHTML='';SKINS.forEach((s,i)=>{const locked=s.req>unlocked,perk=SKILL_PERKS[i];const el=document.createElement('button');el.className='skin-card anime-skin aura-'+i+(locked?' locked':'')+(i===equippedSkin?' equipped':'');el.style.setProperty('--aura-color',s.accent);el.innerHTML=(locked?'<span class="lock">🔒</span>':'')+'<span class="skin-aura" aria-hidden="true"></span>'+astronautSVG(s,i)+`<b>${s.name}</b><span class="aura-label">${perk.aura}</span><span class="ability-label">✦ ${perk.ability}</span><small>${locked?'UNLOCK AT LEVEL '+s.req:perk.description+' · '+(i===equippedSkin?'EQUIPPED':'TAP TO EQUIP')}</small>`;el.setAttribute('aria-label',s.name+(locked?' locked':' choose skin')+'. '+perk.ability);el.addEventListener('click',()=>{if(locked){$('skinHelp').textContent='Reach Level '+s.req+' to unlock '+s.name+'.';sound('fail');return}equippedSkin=i;save();sound('star');chooseSkins()});g.appendChild(el)});$('skinHelp').textContent='Each suit has an animated anime aura and its own special swing ability.';show(els.skins)}
 function chooseMissions(){mode='missions';$('missionList').innerHTML=[
  ['🪝','FIRST SWING','Finish any world',totalWins>=1],
- ['🌎','PLANET EXPLORER','Unlock Mars',unlocked>=2],
+ ['☾','MOON WALKER','Unlock the Moon',unlocked>=2],
  ['⭐','STAR HUNTER','Collect 15 stars',totalCollected>=15],
- ['🪐','GALAXY VOYAGER','Unlock Saturn',unlocked>=4],
- ['☀️','SOLAR SURVIVOR','Unlock the Sun',unlocked>=5],
+ ['🪐','GALAXY VOYAGER','Unlock Saturn',unlocked>=5],
+ ['☀️','SOLAR SURVIVOR','Unlock the Sun',unlocked>=6],
  ['🌌','VOID LEGEND','Unlock all eight worlds',unlocked>=8]
  ].map(([ico,title,desc,done])=>`<div class="mission-row"><span class="mission-icon">${ico}</span><span><b>${title}</b><small>${desc}</small></span><span class="done">${done?'✓':'·'}</span></div>`).join('');$('missionDust').textContent='✦ '+starDust.toLocaleString()+' STAR DUST · EARN BY COMPLETING LEVELS';show(els.missions)}
-const menuSparks=$('menuSparks');for(let i=0;i<28;i++){const sp=document.createElement('span');sp.style.left=((i*37+11)%95)+'%';sp.style.top=((i*59+9)%97)+'%';sp.style.animationDelay=(-(i*.38))+'s';sp.style.animationDuration=(2.5+(i%6)*.6)+'s';menuSparks.appendChild(sp)}
+const menuSparks=$('menuSparks');for(let i=0;i<14;i++){const sp=document.createElement('span');sp.style.left=((i*37+11)%95)+'%';sp.style.top=((i*59+9)%97)+'%';sp.style.animationDelay=(-(i*.38))+'s';sp.style.animationDuration=(2.5+(i%6)*.6)+'s';menuSparks.appendChild(sp)}
 for(const el of document.querySelectorAll('.menu-world'))el.addEventListener('click',()=>chooseLevels(+el.dataset.map));
+$('moonFeatureBtn').addEventListener('click',()=>chooseLevels(2));
 $('worldPrevBtn').addEventListener('click',()=>chooseLevels(1));$('worldNextBtn').addEventListener('click',()=>chooseLevels(8));
 $('skinsBtn').addEventListener('click',chooseSkins);$('missionsBtn').addEventListener('click',chooseMissions);$('backSkinsBtn').addEventListener('click',goHome);$('backMissionsBtn').addEventListener('click',goHome);
 $('playBtn').addEventListener('click',()=>start(unlocked));$('pauseBtn').addEventListener('click',pause);$('soundBtn').addEventListener('click',toggleSound);$('levelsBtn').addEventListener('click',chooseLevels);$('backLevelsBtn').addEventListener('click',goHome);$('resumeBtn').addEventListener('click',resume);$('restartPauseBtn').addEventListener('click',()=>start(currentLevel));$('homePauseBtn').addEventListener('click',goHome);$('winHomeBtn').addEventListener('click',goHome);$('failHomeBtn').addEventListener('click',goHome);$('retryBtn').addEventListener('click',()=>start(currentLevel));$('nextBtn').addEventListener('click',()=>start(currentLevel===LVL_COUNT?1:currentLevel+1));$('soundToggle').addEventListener('change',e=>{soundOn=e.target.checked;save();syncSound();if(soundOn)sound('star')});

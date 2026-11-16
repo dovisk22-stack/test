@@ -166,6 +166,8 @@
 @keyframes auraRotate{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.skin-aura,.skin-aura:before,.skin-aura:after,.anime-skin svg{animation:none}}
 </style>
+<link rel="stylesheet" href="polish.css?v=3">
+<style>#copyright{display:none!important}</style>
 </head>
 <body>
 <canvas id="game" aria-label="Cosmic Hook playable space swinging game"></canvas>
@@ -375,11 +377,22 @@ function drawSky(t){c.setTransform(dpr,0,0,dpr,0,0);const w=WORLDS[(mode==='play
  if(Math.random()<.0028)shooting.push({x:rand(W*.3,W),y:rand(0,CH*.4),vx:-rand(230,400),vy:rand(75,145),life:.75});
  for(const s of shooting){c.globalAlpha=Math.min(1,s.life*2);let g=c.createLinearGradient(s.x,s.y,s.x+70,s.y-26);g.addColorStop(0,'#defaff');g.addColorStop(1,'transparent');c.strokeStyle=g;c.lineWidth=1.6;c.beginPath();c.moveTo(s.x,s.y);c.lineTo(s.x+70,s.y-26);c.stroke()}c.globalAlpha=1;
 }
+const TEXTURE_FILES={EARTH:'earth_daymap',MARS:'mars',JUPITER:'jupiter',SATURN:'saturn',SUN:'sun',NEPTUNE:'neptune',MOON:'moon'};
+const PLANET_IMAGES={};
+for(const [name,file] of Object.entries(TEXTURE_FILES)){const im=new Image();im.decoding='async';im.src='https://www.solarsystemscope.com/textures/download/2k_'+file+'.jpg';PLANET_IMAGES[name]=im;}
 function drawCelestial(world,t,scroll){
  const r=clamp(W*.35,90,250),x=W*.88-scroll*.014+Math.sin(t*.12)*5,y=CH*.19;
  c.save();const aura=c.createRadialGradient(x,y,r*.30,x,y,r*1.8);aura.addColorStop(0,world.glow+'88');aura.addColorStop(.6,world.glow+'2c');aura.addColorStop(1,'transparent');c.fillStyle=aura;c.beginPath();c.arc(x,y,r*1.8,0,TAU);c.fill();
  if(world.name==='SATURN'){c.save();c.translate(x,y);c.rotate(-.25);c.strokeStyle='#e5c3e688';c.lineWidth=r*.2;c.beginPath();c.ellipse(0,0,r*1.6,r*.42,0,0,TAU);c.stroke();c.restore()}
  const surface=c.createRadialGradient(x-r*.45,y-r*.45,r*.04,x+r*.25,y+r*.32,r*1.5);surface.addColorStop(0,world.light);surface.addColorStop(.35,world.main);surface.addColorStop(.77,world.dark);surface.addColorStop(1,'#030113');c.beginPath();c.arc(x,y,r,0,TAU);c.fillStyle=surface;c.fill();
+  const tex=PLANET_IMAGES[world.name];
+  if(tex&&tex.complete&&tex.naturalWidth>0){
+    c.save();c.beginPath();c.arc(x,y,r,0,TAU);c.clip();
+    c.drawImage(tex,Math.floor(tex.naturalWidth*.1),Math.floor(tex.naturalHeight*.06),Math.floor(tex.naturalWidth*.63),Math.floor(tex.naturalHeight*.88),x-r,y-r,r*2,r*2);
+    const shade=c.createRadialGradient(x-r*.33,y-r*.35,r*.1,x+r*.3,y+r*.2,r*1.65);
+    shade.addColorStop(0,'#fff2');shade.addColorStop(.40,'#090c1b0b');shade.addColorStop(.75,'#08091979');shade.addColorStop(1,'#03040de5');
+    c.fillStyle=shade;c.fillRect(x-r,y-r,r*2,r*2);c.restore();
+  }
  c.save();c.beginPath();c.arc(x,y,r*.98,0,TAU);c.clip();
  if(['JUPITER','MARS','NEPTUNE','SATURN'].includes(world.name)){for(let k=0;k<11;k++){let yy=y-r+2*r*k/10;let h=r*(.02+.024*Math.sin(k*2.4));c.globalAlpha=.14+.13*(k%3);c.fillStyle=k%2?world.light:world.dark;c.beginPath();c.ellipse(x+Math.sin(k*1.5)*r*.12,yy,r*1.3,h,.04*Math.cos(k),0,TAU);c.fill()}}
  if(world.name==='EARTH'){for(let k=0;k<9;k++){const px=x+r*Math.sin(k*2.6)*.68,py=y+r*Math.cos(k*2.4)*.65;c.fillStyle=k%3===0?'#bfe5ff99':'#35cb9299';c.beginPath();c.ellipse(px,py,r*.22,r*.12,k*.45,0,TAU);c.fill()}}
@@ -418,58 +431,59 @@ function drawObstacle(ob,t){let y=ob.y+Math.sin(t*1.7+ob.phase)*28;c.save();c.tr
 function drawPortal(x,y,t){c.save();c.translate(x,y);c.strokeStyle='#b8efff';c.lineWidth=1.2;c.globalAlpha=.12;c.beginPath();c.moveTo(0,-240);c.lineTo(0,240);c.stroke();c.globalAlpha=1;const pulse=1+.045*Math.sin(t*3);c.scale(pulse,pulse);const g=c.createRadialGradient(0,0,10,0,0,103);g.addColorStop(0,'rgba(200,146,255,.42)');g.addColorStop(.6,'rgba(127,91,252,.24)');g.addColorStop(1,'transparent');c.fillStyle=g;c.fillRect(-110,-110,220,220);c.save();c.rotate(t*.9);for(let i=0;i<3;i++){c.beginPath();c.ellipse(0,0,39+i*13,66+i*6,(i*1.03),0,TAU);c.lineWidth=4-i*.6;c.strokeStyle=['#b17bff','#7df3ff','#f4a4ff'][i];c.shadowBlur=16;c.shadowColor=c.strokeStyle;c.stroke()}c.restore();glowCircle(0,0,15,'#f0d7ff',23);c.fillStyle='#fff';c.font='900 11px system-ui';c.textAlign='center';c.fillText('PORTAL',0,-96);c.restore()}
 
 function drawAnimeAura(p,t){
- const s=SKINS[equippedSkin],id=equippedSkin,v=t*2.8,power=grapple?1.15:1;
- c.save();c.translate(p.x,p.y-5);c.globalCompositeOperation='screen';
- const radius=(id===7?58:43)*power;const aura=c.createRadialGradient(0,0,5,0,0,radius*1.45);
- aura.addColorStop(0,s.accent+'28');aura.addColorStop(.45,s.accent+'35');aura.addColorStop(1,s.accent+'00');c.fillStyle=aura;
- c.beginPath();c.arc(0,0,radius*1.5,0,TAU);c.fill();
- c.shadowColor=s.accent;c.shadowBlur=id===7?21:14;
- // Glowing anime energy ribbons, unique timing and shape for each suit.
- const blades=(id===3||id===7)?8:6;
- for(let i=0;i<blades;i++){
-   const ang=i*TAU/blades+(id===4?v*.28:id===7?-v*.55:v*.16);
-   const dist=radius*(.83+.06*Math.sin(v*2+i*1.71)),span=.45+.14*Math.sin(v+i);
-   c.beginPath();c.ellipse(0,0,dist,dist*(id===4?.70:1),id===4?.46:0,ang,ang+span);
-   c.strokeStyle=i%2?s.edge+'99':s.accent+'cc';c.lineWidth=id===5?3:1.6;c.stroke();
- }
- const count=id===5?13:id===7?18:10;
- for(let i=0;i<count;i++){
-   let a=i*TAU/count+Math.sin(v*.6+i)*.2,rad=radius*(.63+.3*Math.sin(v*1.25+i*2));
-   let x=Math.cos(a)*rad,y=Math.sin(a)*(id===4?.58:1)*rad;
-   c.globalAlpha=.35+.55*(.5+.5*Math.sin(v*2+i));
-   c.fillStyle=i%3?s.accent:s.edge;
-   c.beginPath();
-   if(id===5||id===2){c.moveTo(x,y-7);c.lineTo(x-4,y+5);c.lineTo(x+4,y+3);c.closePath()}
-   else{c.arc(x,y,(id===3||id===7)?2.8:1.7,0,TAU)}
-   c.fill();
-   if(id===1||id===3){c.strokeStyle=s.edge;c.lineWidth=1;c.beginPath();c.moveTo(x,y);c.lineTo(x+Math.sin(v*3+i)*7,y-8);c.lineTo(x+Math.sin(v*3+i)*11,y-15);c.stroke()}
- }
- c.globalAlpha=1;
- if(id===4){c.save();c.rotate(.3);c.strokeStyle=s.edge+'ad';c.lineWidth=2.2;c.beginPath();c.ellipse(0,0,radius*1.18,radius*.39,0,0,TAU);c.stroke();c.restore()}
- if(id===6){for(let i=0;i<3;i++){c.strokeStyle=s.edge+'55';c.lineWidth=1.4;c.beginPath();c.ellipse(0,9+i*6,21+i*5,10+i*3,0,0,Math.PI);c.stroke()}}
- c.restore();
+  const suit=SKINS[equippedSkin],k=equippedSkin,boost=grapple?1.16:1;
+  c.save();c.translate(p.x,p.y-5);c.globalCompositeOperation='screen';
+  const intensity=k===7?.6:.35;
+  for(let j=0;j<10;j++){
+    const theta=j*TAU/10+t*(k===7?-.15:.11),len=(31+8*Math.sin(t*4+j*1.61))*boost;
+    const x=Math.cos(theta),y=Math.sin(theta),side=(k===5?8:5);
+    c.fillStyle=j%2?suit.accent:suit.edge;c.globalAlpha=intensity*(.55+.45*Math.sin(t*3+j*2));
+    c.beginPath();c.moveTo(x*15-y*side,y*15+x*side);
+    c.lineTo(x*(len+12),y*(len+12));c.lineTo(x*15+y*side,y*15-x*side);c.closePath();c.fill();
+  }
+  c.globalAlpha=.36;c.strokeStyle=suit.edge;c.lineWidth=k===1?1.5:1.1;
+  for(let j=0;j<5;j++){const a=t*(k===7?-.7:.8)+j*TAU/5;const x=Math.cos(a)*35,y=Math.sin(a)*35;
+   c.beginPath();c.moveTo(x,y);c.lineTo(x+Math.sin(t*5+j)*9,y-10);c.lineTo(x+Math.cos(t*3+j)*11,y-19);c.stroke();
+  }
+  c.restore();
 }
 
 function drawStickman(p,t){
- const s=SKINS[equippedSkin];c.save();c.translate(p.x,p.y);c.rotate(clamp((p.vx-260)/1000,-.22,.28));const swing=Math.sin(t*(grapple?8:13));
- const halo=c.createRadialGradient(0,0,2,0,0,51);halo.addColorStop(0,s.accent+'68');halo.addColorStop(1,'transparent');c.fillStyle=halo;c.beginPath();c.arc(0,0,51,0,TAU);c.fill();
- // Jet pack, cape and helmet antenna are distinct from the original stick figure.
- c.save();c.shadowColor=s.accent;c.shadowBlur=13;c.fillStyle='#0b0c25';c.strokeStyle=s.accent;c.lineWidth=2;c.beginPath();c.roundRect(-15,-8,30,33,7);c.fill();c.stroke();c.restore();
- c.save();c.fillStyle=s.accent+'77';c.beginPath();c.moveTo(-10,2);c.quadraticCurveTo(-26,18+swing*4,-23,35);c.quadraticCurveTo(-7,25,6,16);c.fill();c.restore();
- function limb(x,y,rot,w,h){c.save();c.translate(x,y);c.rotate(rot);const gr=c.createLinearGradient(-w/2,-h/2,w/2,h/2);gr.addColorStop(0,s.edge);gr.addColorStop(.48,s.accent);gr.addColorStop(1,'#120a36');c.fillStyle=gr;c.strokeStyle=s.edge;c.lineWidth=1.6;c.shadowColor=s.accent;c.shadowBlur=8;c.beginPath();c.roundRect(-w/2,-h/2,w,h,w*.42);c.fill();c.stroke();c.restore()}
- limb(-7,16,-.18+swing*.26,10,26);limb(9,16,.25-swing*.22,10,25);
- limb(-12,0,-.42+swing*.2,9,23);limb(13,-1,grapple?-.75:.40-swing*.23,9,24);
- const body=c.createLinearGradient(-13,-5,17,20);body.addColorStop(0,s.edge);body.addColorStop(.5,s.accent);body.addColorStop(1,'#171035');c.fillStyle=body;c.strokeStyle=s.edge;c.lineWidth=1.8;c.shadowColor=s.accent;c.shadowBlur=12;c.beginPath();c.roundRect(-13,-9,26,29,9);c.fill();c.stroke();c.shadowBlur=0;
- // Backpack clamps and glowing emblem.
- c.fillStyle='#100825';c.strokeStyle=s.edge;c.lineWidth=1;c.beginPath();c.arc(0,4,7,0,TAU);c.fill();c.stroke();c.fillStyle=s.edge;c.font='900 11px sans-serif';c.textAlign='center';c.fillText(s.symbol,0,8);
- const helm=c.createRadialGradient(-5,-19,1,2,-10,24);helm.addColorStop(0,s.edge);helm.addColorStop(.50,s.accent);helm.addColorStop(1,'#211040');c.fillStyle=helm;c.strokeStyle=s.edge;c.lineWidth=2;c.shadowColor=s.accent;c.shadowBlur=13;c.beginPath();c.ellipse(0,-18,18,18,0,0,TAU);c.fill();c.stroke();c.shadowBlur=0;
- const visor=c.createLinearGradient(-10,-29,13,-8);visor.addColorStop(0,'#e5ffff');visor.addColorStop(.26,s.visor);visor.addColorStop(.8,'#0b0630');c.fillStyle=visor;c.strokeStyle='#e7cdff';c.lineWidth=1;c.beginPath();c.ellipse(1,-18,13.8,11.6,0,0,TAU);c.fill();c.stroke();
- c.globalAlpha=.8;c.fillStyle='#fff';c.beginPath();c.ellipse(-5,-24,5,2.1,-.5,0,TAU);c.fill();c.globalAlpha=1;
- if(equippedSkin===4){c.strokeStyle=s.edge;c.lineWidth=2;c.beginPath();c.ellipse(0,-18,26,8,-.3,0,TAU);c.stroke()}
- if(equippedSkin===5){c.shadowColor='#ffae52';c.shadowBlur=18;c.fillStyle='#ffc846';c.beginPath();c.moveTo(0,-43);c.lineTo(5,-33);c.lineTo(-5,-33);c.fill();c.shadowBlur=0}
- if(equippedSkin===7){c.strokeStyle=s.accent;c.lineWidth=1.6;c.beginPath();c.arc(0,-18,26,Math.PI,Math.PI*2);c.stroke()}
- if(p.invuln>.1){c.globalAlpha=.3*Math.min(1,p.invuln);c.strokeStyle=s.edge;c.lineWidth=2;c.beginPath();c.arc(0,0,40+Math.sin(t*11)*2,0,TAU);c.stroke()}
- c.restore();}
+ const skin=SKINS[equippedSkin],swing=Math.sin(t*(grapple?8:12));
+ c.save();c.translate(p.x,p.y);c.rotate(clamp((p.vx-260)/1300,-.18,.23));
+ const armour=c.createLinearGradient(-16,-24,17,16);armour.addColorStop(0,skin.edge);armour.addColorStop(.3,skin.accent);armour.addColorStop(.8,'#1c263b');armour.addColorStop(1,'#070a14');
+ const dark='#111827',line=skin.edge;
+ // Compact thruster backpack.
+ c.fillStyle='#0b1020';c.strokeStyle='#5d6784';c.lineWidth=1.4;c.beginPath();c.moveTo(-19,-8);c.lineTo(18,-8);c.lineTo(21,17);c.lineTo(-18,18);c.closePath();c.fill();c.stroke();
+ c.fillStyle=skin.accent;c.globalAlpha=.55;c.fillRect(-20,7,3,8);c.fillRect(17,7,3,8);c.globalAlpha=1;
+ // Angular suit limbs; forward arm moves with the swing.
+ function panel(x,y,rotation,w,h){
+  c.save();c.translate(x,y);c.rotate(rotation);c.fillStyle=armour;c.strokeStyle=line;c.lineWidth=1.2;c.beginPath();
+  c.moveTo(-w*.48,-h*.50);c.lineTo(w*.35,-h*.5);c.lineTo(w*.58,-h*.3);c.lineTo(w*.45,h*.43);c.lineTo(-w*.34,h*.5);c.lineTo(-w*.58,h*.22);c.closePath();c.fill();c.stroke();
+  c.strokeStyle='#fff7';c.lineWidth=.65;c.beginPath();c.moveTo(-w*.2,-h*.29);c.lineTo(w*.12,-h*.29);c.stroke();c.restore();
+ }
+ panel(-8,19,-.18+swing*.22,12,27);panel(9,19,.20-swing*.21,12,27);
+ panel(-15,0,-.37+swing*.18,10,25);panel(15,0,grapple?-.78:.40-swing*.22,10,25);
+ // Chest armor with articulated plating and center reactor.
+ c.fillStyle=armour;c.strokeStyle=line;c.lineWidth=1.5;c.beginPath();
+ c.moveTo(-13,-9);c.lineTo(12,-9);c.lineTo(16,0);c.lineTo(12,18);c.lineTo(0,22);c.lineTo(-13,18);c.lineTo(-16,0);c.closePath();c.fill();c.stroke();
+ c.fillStyle=dark;c.beginPath();c.moveTo(-9,-4);c.lineTo(9,-4);c.lineTo(11,10);c.lineTo(0,15);c.lineTo(-11,10);c.closePath();c.fill();
+ c.strokeStyle=skin.edge;c.lineWidth=1;c.beginPath();c.moveTo(-8,8);c.lineTo(0,3);c.lineTo(8,8);c.stroke();
+ c.fillStyle=skin.accent;c.fillRect(-3,0,6,7);
+ // Distinctive polygonal helmet rather than a bubble.
+ c.fillStyle=armour;c.strokeStyle=line;c.lineWidth=1.8;c.beginPath();
+ c.moveTo(-15,-33);c.lineTo(-9,-40);c.lineTo(9,-40);c.lineTo(16,-33);c.lineTo(17,-16);c.lineTo(9,-9);c.lineTo(-10,-9);c.lineTo(-17,-16);c.closePath();c.fill();c.stroke();
+ const glass=c.createLinearGradient(-12,-33,12,-13);glass.addColorStop(0,'#b6d8ef');glass.addColorStop(.24,'#527893');glass.addColorStop(.5,skin.visor);glass.addColorStop(1,'#020713');
+ c.fillStyle=glass;c.strokeStyle='#bdc8df';c.lineWidth=1;c.beginPath();
+ c.moveTo(-11,-30);c.lineTo(9,-33);c.lineTo(13,-28);c.lineTo(11,-20);c.lineTo(5,-16);c.lineTo(-8,-17);c.lineTo(-12,-23);c.closePath();c.fill();c.stroke();
+ c.strokeStyle='#ffffff88';c.lineWidth=.8;c.beginPath();c.moveTo(-9,-28);c.lineTo(2,-31);c.stroke();
+ if(equippedSkin===4){c.strokeStyle=line;c.lineWidth=1.8;c.beginPath();c.ellipse(0,-28,21,6,-.3,0,TAU);c.stroke();}
+ if(equippedSkin===5){c.fillStyle='#ffc779';c.beginPath();c.moveTo(0,-49);c.lineTo(6,-39);c.lineTo(-5,-39);c.closePath();c.fill();}
+ if(equippedSkin===7){c.strokeStyle=skin.accent;c.lineWidth=1.2;c.beginPath();c.moveTo(-15,-40);c.lineTo(-20,-50);c.moveTo(15,-40);c.lineTo(20,-50);c.stroke();}
+ if(p.invuln>.1){c.globalAlpha=.2*Math.min(1,p.invuln);c.strokeStyle=skin.edge;c.lineWidth=2;c.beginPath();c.arc(0,-3,45+Math.sin(t*8),0,TAU);c.stroke();}
+ c.restore();
+}
+
 function updateFx(dt){now+=dt;frame++;shake*=Math.pow(.06,dt);for(const p of particles){p.x+=p.vx*dt;p.y+=p.vy*dt;p.vy+=90*dt;p.vx*=Math.pow(.1,dt);p.life-=dt}particles=particles.filter(p=>p.life>0);for(const p of trails)p.life-=dt;trails=trails.filter(p=>p.life>0);for(const f of floats){f.life-=dt;f.y-=24*dt}floats=floats.filter(f=>f.life>0);for(const s of shooting){s.life-=dt;s.x+=s.vx*dt;s.y+=s.vy*dt}shooting=shooting.filter(s=>s.life>0)}
 function tick(ts){if(!lastTime)lastTime=ts;let dt=clamp((ts-lastTime)/1000,0,.045);lastTime=ts;updateFx(dt);if(mode==='playing'){accum+=dt;let steps=0;while(accum>=1/120&&steps<6){physics(1/120);accum-=1/120;steps++;if(mode!=='playing')break;}if(steps>=6)accum=0;}else{accum=0}
  drawSky(now);if(mode!=='home'&&mode!=='levels'){drawWorld(now)}requestAnimationFrame(tick)}
@@ -478,5 +492,6 @@ goHome();requestAnimationFrame(tick);
 window.__cosmicHook={getState:()=>({mode,level:currentLevel,x:player?.x||0,y:player?.y||0,vx:player?.vx||0,vy:player?.vy||0,stars:got,score,grapple:!!grapple,hookX:grapple?.point.x||0,awaitingFirstHook,unlocked,equippedSkin,skin:SKINS[equippedSkin].name,starDust,totalWins,ability:SKILL_PERKS[equippedSkin].ability,shieldCharges,world:WORLDS[currentLevel-1].name}),start,press:()=>press(),release:()=>release(),openSkins:chooseSkins,openWorlds:chooseLevels};
 })();
 </script>
+<script src="polish.js?v=3"></script>
 </body>
 </html>

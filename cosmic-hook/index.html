@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover, user-scalable=no">
-<meta name="theme-color" content="#110725">
+<meta name="theme-color" content="#070b12">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon.svg">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="description" content="COSMIC HOOK — a neon galaxy swinging arcade game. Touch, swing, and soar through the stars.">
-<title>COSMIC HOOK — Galaxy Swing Arcade</title>
+<title>COSMIC HOOK — Anime Odyssey</title>
 <style>
   :root{--violet:#af6aff;--pink:#f08bff;--cyan:#70edff;--ink:#09051c;--white:#faf5ff}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -648,5 +648,6 @@ window.__cosmicHook={getState:()=>({mode,level:currentLevel,x:player?.x||0,y:pla
 })();
 </script>
 <script src="polish.js?v=3"></script>
+<script>if('serviceWorker' in navigator && location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}))}</script>
 </body>
 </html>

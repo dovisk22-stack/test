@@ -1,0 +1,19 @@
+{
+  "name": "COSMIC HOOK — Anime Odyssey",
+  "short_name": "COSMIC HOOK",
+  "description": "Anime-inspired planetary grappling arcade with custom astronaut skins and a lunar-world adventure",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050910",
+  "theme_color": "#090e1d",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

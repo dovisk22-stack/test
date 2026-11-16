@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#131a34"/><stop offset="1" stop-color="#05060e"/></linearGradient><linearGradient id="fl" x1="0" x2="1"><stop stop-color="#aebeff"/><stop offset=".6" stop-color="#bd77ff"/><stop offset="1" stop-color="#6030a4"/></linearGradient></defs>
+<rect width="512" height="512" rx="100" fill="url(#bg)"/>
+<path d="M22 378 142 270 238 325 339 154 492 110" fill="none" stroke="#7b52c4" stroke-opacity=".37" stroke-width="8"/>
+<path d="M90 124 127 182 84 205M375 318 410 355 378 389" fill="none" stroke="#e2a4ff" stroke-opacity=".55" stroke-width="4"/>
+<path d="M164 201h160l-38 37H207l-11 39h84l-18 52H158l-30-61z" fill="url(#fl)" stroke="#e2c9ff" stroke-width="7" stroke-linejoin="bevel"/>
+<path d="M264 202 236 285 297 285 271 331" fill="none" stroke="#090e23" stroke-width="16" stroke-linecap="square"/>
+<path d="M357 94 380 130 416 143 380 156 357 194 333 156 297 143 333 130z" fill="#f5e1ff" stroke="#ae84ff" stroke-width="5"/>
+<text x="256" y="425" text-anchor="middle" fill="#c9b4ed" font-family="sans-serif" font-size="35" font-weight="800" letter-spacing="9">COSMIC</text>
+</svg>

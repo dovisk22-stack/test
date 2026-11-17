@@ -1,13 +1,13 @@
 {
-  "name": "Cosmic Hook — Planet Party Plus",
+  "name": "Cosmic Hook — Planet Party HD",
   "short_name": "Cosmic Hook",
-  "description": "Play 30 space-swing levels with funny characters, animated speed gates, checkpoints, star combos, and 10 colorful worlds.",
+  "description": "HD planet worlds and fun cartoon swinging adventure with 10 playable planets and characters.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#24155e",
-  "theme_color": "#24155e",
+  "background_color": "#1e1453",
+  "theme_color": "#291764",
   "icons": [
     {
       "src": "icon.svg",

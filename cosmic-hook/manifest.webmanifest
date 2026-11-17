@@ -1,7 +1,7 @@
 {
-  "name": "Cosmic Hook — Planet Party",
+  "name": "Cosmic Hook — Planet Party Plus",
   "short_name": "Cosmic Hook",
-  "description": "Play as a star with sunglasses in 10 space worlds, collect rewards and unlock 10 funny characters.",
+  "description": "Play 30 space-swing levels with funny characters, animated speed gates, checkpoints, star combos, and 10 colorful worlds.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

@@ -1,13 +1,13 @@
 {
-  "name": "Cosmic Hook — Swing Smile Soar",
+  "name": "Cosmic Hook — Planet Party",
   "short_name": "Cosmic Hook",
-  "description": "Play as a star with sunglasses, swing between planets, and unlock funny space buddies.",
+  "description": "Play as a star with sunglasses in 10 space worlds, collect rewards and unlock 10 funny characters.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#251566",
-  "theme_color": "#251566",
+  "background_color": "#24155e",
+  "theme_color": "#24155e",
   "icons": [
     {
       "src": "icon.svg",

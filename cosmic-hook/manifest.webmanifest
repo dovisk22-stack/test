@@ -1,13 +1,13 @@
 {
-  "name": "COSMIC HOOK — Anime Odyssey",
-  "short_name": "COSMIC HOOK",
-  "description": "Anime-inspired planetary grappling arcade with custom astronaut skins and a lunar-world adventure",
-  "start_url": "/",
-  "scope": "/",
+  "name": "Cosmic Hook — Swing Smile Soar",
+  "short_name": "Cosmic Hook",
+  "description": "Play as a star with sunglasses, swing between planets, and unlock funny space buddies.",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#050910",
-  "theme_color": "#090e1d",
+  "background_color": "#251566",
+  "theme_color": "#251566",
   "icons": [
     {
       "src": "icon.svg",

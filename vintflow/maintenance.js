@@ -4,6 +4,7 @@ const conf={"url":"https://bwzlnuoncokanwhldglt.supabase.co","key":"sb_publishab
 const form=document.getElementById("owner-form"),msg=document.getElementById("owner-status"),btn=document.getElementById("owner-submit"),password=document.getElementById("owner-password"),email=document.getElementById("owner-email"),continueButton=document.getElementById("owner-continue");
 if(!form||!msg||!btn||!password||!email)return;
 let busy=false;
+const workspaceRoute=["/app/","/app/index.html"].includes(location.pathname);
 function savedSession(){try{const s=JSON.parse(localStorage.getItem(storageKey)||"null");return typeof s?.access_token==="string"&&s.access_token?s:null}catch{return null}}
 function message(t){msg.textContent=t}
 function working(value){busy=value;form.setAttribute("aria-busy",String(value));btn.disabled=value;if(continueButton)continueButton.disabled=value}
@@ -42,7 +43,7 @@ async function unlock(session,allowRefresh=true){
  if(x.status!==200){message(explanation(x.status,"workspace"));return false}
  if(typeof x.data.html!=="string"||!x.data.html.includes('id="vf-auth-config"')){message("The workspace returned an unexpected response. Please contact support.");return false}
  if(!persist(session)){message("Your browser is blocking session storage. Allow site storage and try again.");return false}
- if(location.pathname!=="/"&&location.pathname!=="/index.html"){location.replace("/");return true}
+ if(!workspaceRoute){const target=new URL(location.href);target.pathname="/app/";target.hash="";target.searchParams.delete("public");location.assign(target.href);return true}
  try{history.replaceState(null,"",location.pathname+location.search)}catch{}
  window.scrollTo(0,0);document.open();document.write(x.data.html);document.close();window.scrollTo(0,0);return true;
 }
@@ -59,4 +60,11 @@ async function continueSaved(){
 }
 if(continueButton){continueButton.hidden=!savedSession();continueButton.addEventListener("click",continueSaved)}
 document.querySelectorAll(".vf-owner-link").forEach(link=>link.addEventListener("click",event=>{if(savedSession()){event.preventDefault();document.getElementById("owner-access")?.scrollIntoView({behavior:"instant"});continueSaved()}}));
+if(workspaceRoute){
+ const loading=document.getElementById("workspace-loading");
+ if(savedSession()){
+  form.hidden=true;
+  continueSaved().finally(()=>{if(document.getElementById("owner-form")){form.hidden=false;if(loading)loading.hidden=true}});
+ }else{form.hidden=false;if(loading)loading.hidden=true;}
+}
 })();

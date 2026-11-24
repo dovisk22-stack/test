@@ -59,7 +59,22 @@ async function continueSaved(){
  try{await unlock(session)}catch(e){networkError(e)}finally{working(false)}
 }
 if(continueButton){continueButton.hidden=!savedSession();continueButton.addEventListener("click",continueSaved)}
-document.querySelectorAll(".vf-owner-link").forEach(link=>link.addEventListener("click",event=>{if(savedSession()){event.preventDefault();document.getElementById("owner-access")?.scrollIntoView({behavior:"instant"});continueSaved()}}));
+document.querySelectorAll(".vf-mobile-menu").forEach(menu => {
+ const summary = menu.querySelector("summary");
+ document.addEventListener("pointerdown", event => {
+  if (menu.open && !menu.contains(event.target)) menu.open = false;
+ });
+ document.addEventListener("focusin", event => {
+  if (menu.open && !menu.contains(event.target)) menu.open = false;
+ });
+ menu.addEventListener("keydown", event => {
+  if (event.key === "Escape" && menu.open) {
+   event.preventDefault();
+   menu.open = false;
+   summary.focus();
+  }
+ });
+});
 if(workspaceRoute){
  const loading=document.getElementById("workspace-loading");
  if(savedSession()){

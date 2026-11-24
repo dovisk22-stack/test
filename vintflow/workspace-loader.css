@@ -1,1 +1,13 @@
 [hidden]{display:none!important}.workspace-shell{max-width:450px;margin:0 auto;padding:42px 22px 50px}.workspace-shell>.logo{margin-bottom:36px}.workspace-shell form{padding:25px;border:1px solid var(--edge);border-radius:15px;background:var(--panel)}.workspace-shell h1{font-size:28px;letter-spacing:-1px;line-height:1.2;margin:0 0 12px}.workspace-shell p{font-size:14px;line-height:1.7;color:var(--muted)}.workspace-shell label{display:block;font-size:13px;font-weight:600}.workspace-shell input{display:block;width:100%;font:inherit;font-size:16px;min-height:48px;border:1px solid var(--edge);border-radius:9px;background:var(--bg);color:var(--text);padding:12px;margin:7px 0 18px}.workspace-shell button{width:100%;margin:6px 0}.workspace-shell button:disabled{opacity:.6}.workspace-back{display:inline-block;font-size:13px;margin-top:24px}.workspace-loading{padding:20px 0 0}.workspace-loading h1{font-size:24px}.workspace-spinner{display:block;width:25px;height:25px;margin-bottom:20px;border:2px solid var(--edge);border-top-color:var(--accent);border-radius:50%;animation:workspace-spin .8s linear infinite}@keyframes workspace-spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.workspace-spinner{animation:none}}
+
+.workspace-shell :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.workspace-shell form[aria-busy="true"] button:disabled { cursor: progress; }
+@media (prefers-reduced-motion: no-preference) {
+  .workspace-signin form { animation: signin-settle 240ms ease-out; }
+  @keyframes signin-settle {
+    from { transform: translateY(4px); }
+    to { transform: translateY(0); }
+  }
+  .workspace-shell .cta { transition: transform 140ms ease-out, opacity 140ms ease-out; }
+  .workspace-shell .cta:active:not(:disabled) { transform: scale(.985); }
+}

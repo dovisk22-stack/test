@@ -1,0 +1,39 @@
+/* The stock lookbook uses the workspace's existing item controls and theme switch. */
+html[data-theme="light"] {
+  --t-bg: #f5f1e9; --t-surface: #fffdf8; --t-secondary: #ece6dc;
+  --t-accent: #722946; --t-accent-hover: #572037; --t-on-accent: #fffaf4;
+  --t-ink: #30282a; --t-muted: #65595c; --t-line: #d8cfc8;
+  --t-selected: #f1dee4;
+}
+html[data-theme="dark"] {
+  --t-bg: #1d191c; --t-surface: #292328; --t-secondary: #352b30;
+  --t-accent: #edb1c1; --t-on-accent: #311823; --t-accent-hover: #f8c7d4;
+  --t-line: #51444c; --t-selected: #48303b;
+}
+html[data-theme] :is(#dashboard,#inventory) h1 {
+  font-family: Georgia, serif; font-weight: 500; letter-spacing: -.045em;
+}
+html[data-theme] #inventory .vf-stock-tools { padding: 12px; }
+html[data-theme] :is(#items,#recent):has(> .item) {
+  display: grid; grid-template-columns: repeat(auto-fill,minmax(min(100%,180px),1fr));
+  gap: 14px; padding: 12px 0; background: transparent; border: 0; box-shadow: none;
+}
+html[data-theme] :is(#dashboard #recent,#inventory #items) > .item {
+  display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start;
+  margin: 0; padding: 10px; gap: 9px; min-width: 0;
+  background: var(--t-surface); border: 1px solid var(--t-line); border-radius: 9px;
+  box-shadow: inset 0 1px 0 rgba(195,194,199,.45);
+}
+html[data-theme] :is(#items,#recent) .item .thumb {
+  width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: contain;
+  border-radius: 4px; background: var(--t-secondary);
+}
+html[data-theme] :is(#items,#recent) .item .grow { min-width: 0; overflow-wrap: anywhere; }
+html[data-theme] :is(#items,#recent) .item button { max-width: 100%; white-space: normal; }
+@media (min-width: 340px) and (max-width: 640px) {
+  html[data-theme] :is(#items,#recent):has(> .item) { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; }
+}
+@media (hover:hover) and (prefers-reduced-motion:no-preference) {
+  html[data-theme] :is(#items,#recent) .item { transition: transform .18s ease; }
+  html[data-theme] :is(#items,#recent) .item:hover { transform: translateY(-2px); }
+}

@@ -81,3 +81,10 @@
     .vf-landing-hero .cta:hover span { transform: translate(2px,-2px); }
   }
 }
+
+/* Shared editorial login treatment. */
+.vf-public .vf-login-button{gap:7px;min-height:44px;padding:8px 15px;background:var(--accent);color:var(--on);border:1px solid var(--accent);border-radius:9px;font-weight:720;text-decoration:none;white-space:nowrap}
+.vf-public .vf-login-button:hover{opacity:.9;color:var(--on)}
+.vf-public .vf-login-button svg{flex:none}
+.vf-public .vf-login-button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:360px){.vf-public .vf-login-button{padding:8px 10px;font-size:12px}.vf-public .vf-login-button svg{width:14px;height:14px}}

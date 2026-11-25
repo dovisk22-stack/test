@@ -11,3 +11,12 @@
   .workspace-shell .cta { transition: transform 140ms ease-out, opacity 140ms ease-out; }
   .workspace-shell .cta:active:not(:disabled) { transform: scale(.985); }
 }
+
+/* Keep the login route consistent with VintFlow's editorial surfaces. */
+.workspace-shell{max-width:460px;padding:clamp(24px,6vw,48px) 20px 50px}
+.workspace-shell>.logo{margin-bottom:26px;letter-spacing:-.04em}
+.workspace-shell form{padding:clamp(18px,5vw,28px);border-radius:13px;box-shadow:none}
+.workspace-kicker{display:block;color:var(--accent);font-size:10px;font-weight:750;letter-spacing:.13em;margin-bottom:10px}
+.workspace-shell h1{font-size:clamp(28px,7vw,36px);letter-spacing:-.045em;font-weight:740}
+.workspace-shell .cta{min-height:48px;border-radius:9px;font-weight:720}
+.workspace-shell #owner-status{overflow-wrap:anywhere;font-size:13px}

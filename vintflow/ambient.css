@@ -1,0 +1,68 @@
+
+/* VintFlow Ambient Studio — shared visual layer, no new scripts or services. */
+body.vf-public,body:has(>.workspace-shell),html[data-theme] body:has(#dashboard){isolation:isolate;min-height:100vh;--vf-ambient-accent:var(--accent,#72e5bc);--vf-ambient-secondary:#a998dc}
+html[data-theme] body:has(#dashboard){--vf-ambient-accent:var(--t-accent,#72e5bc)}
+html[data-theme="light"] body{--vf-ambient-secondary:#b7848e}
+body.vf-public::after,body:has(>.workspace-shell)::after,html[data-theme] body:has(#dashboard)::after{
+ content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+ background:radial-gradient(ellipse at 82% 17%,color-mix(in srgb,var(--vf-ambient-accent) 14%,transparent),transparent 38%),radial-gradient(ellipse at 14% 80%,color-mix(in srgb,var(--vf-ambient-secondary) 12%,transparent),transparent 42%),radial-gradient(ellipse at 93% 20%,transparent 36%,color-mix(in srgb,var(--vf-ambient-accent) 9%,transparent) 36.1%,transparent 36.3%,transparent 45%,color-mix(in srgb,var(--vf-ambient-accent) 6%,transparent) 45.1%,transparent 45.3%);opacity:.85;transform:translate3d(0,0,0)
+}
+@keyframes vfAmbientDrift{0%,100%{transform:translate3d(0,0,0) scale(1.06);opacity:.68}50%{transform:translate3d(0,0,0) scale(1.12);opacity:1}}
+@media(prefers-reduced-motion:no-preference){body.vf-public::after,body:has(>.workspace-shell)::after,html[data-theme] body:has(#dashboard)::after{animation:vfAmbientDrift 18s ease-in-out infinite}}
+html[data-vf-motion="off"] body::after,html[data-vf-motion="minimal"] body::after{animation:none!important}
+@media(prefers-reduced-motion:reduce){body.vf-public::after,body:has(>.workspace-shell)::after,html[data-theme] body:has(#dashboard)::after{animation:none!important}}
+/* Editorial homepage. */
+.vf-public header{background:var(--bg);border-bottom:1px solid var(--edge)}
+.vf-public .editorial{gap:clamp(24px,5vw,72px);padding:clamp(32px,6vw,82px) 0}
+.vf-public .vf-studio-kicker{display:inline-block;align-self:flex-start;color:var(--accent);font-size:10px;font-weight:750;letter-spacing:.17em;line-height:1.5;margin:0 0 13px}
+.vf-public .editorial h1{font-size:clamp(48px,6.7vw,90px);line-height:1.02;letter-spacing:-.065em;margin:0 0 18px}
+.vf-public .editorial h1 em{font-style:italic;letter-spacing:-.055em}
+.vf-public .editorial .intro{font-size:clamp(16px,1.7vw,19px);max-width:40ch;line-height:1.65}
+.vf-public .editorial .actions{margin-top:22px}
+.vf-public .editorial .cta{min-height:52px;border-radius:10px;font-weight:720}
+.vf-public .lookbook{border-radius:16px;min-width:0;box-shadow:0 18px 52px #00000018}
+.vf-public .product-shot{border-bottom:1px solid var(--edge);background-repeat:no-repeat}
+.vf-public .switches{padding:12px 14px 0;gap:7px}
+.vf-public .switches button{min-height:44px;border-radius:7px;font-size:12px;font-weight:650;padding:8px 11px}
+.vf-public .switches button[aria-pressed=true]{background:var(--accent);color:var(--on);border-color:var(--accent)}
+.vf-public .sample{padding:17px 18px 21px}
+.vf-public .sample small{color:var(--accent)}
+.vf-public .sample h2{line-height:1.15;font-size:clamp(21px,2.4vw,29px)}
+.vf-public .sample p{font-size:14px;color:var(--muted)}
+.vf-public .vf-section>h2,.vf-public .studio h2{font-size:clamp(27px,3.5vw,43px);letter-spacing:-.045em;line-height:1.12}
+.vf-public .studio form{padding:clamp(15px,3vw,24px);background:var(--panel);border:1px solid var(--edge);border-radius:13px;min-width:0}
+.vf-public .studio input,.vf-public .studio textarea{background:var(--bg);font-size:16px;min-height:46px}
+.vf-public .vf-feature-grid article{min-width:0;border-radius:13px;padding:clamp(18px,2vw,24px);background:var(--panel)}
+.vf-public .vf-feature-grid article>span{font-size:10px;letter-spacing:.12em;font-weight:740;color:var(--accent)}
+.vf-public .vf-feature-grid article h3{font-size:21px;letter-spacing:-.035em;line-height:1.2}
+.vf-public .vf-feature-grid article p,.vf-public .seo-card p{line-height:1.6}
+.vf-public .seo-card,.vf-public .vf-owner form{background:var(--panel);border-radius:13px}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .vf-public .vf-feature-grid article,.vf-public .seo-card{transition:transform .2s ease,border-color .2s ease}
+ .vf-public .vf-feature-grid article:hover,.vf-public .seo-card:hover{transform:translateY(-3px);border-color:var(--accent)}
+}
+/* Matching login experience. */
+.workspace-shell form{border-radius:15px;box-shadow:0 18px 58px #00000013}
+.workspace-shell>.logo{min-height:44px}
+.workspace-shell .workspace-kicker{letter-spacing:.15em}
+.workspace-shell #owner-submit{background:var(--accent);color:var(--on);border:1px solid var(--accent)}
+.workspace-shell #owner-submit:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+/* Private workspace — solid operational surfaces for clear selling screens. */
+html[data-theme] #dashboard .hero.vf-showcase{background:radial-gradient(ellipse at 98% 0%,color-mix(in srgb,var(--t-accent) 8%,transparent),transparent 57%),var(--t-surface)!important;border:1px solid var(--t-line);border-radius:16px;box-shadow:0 12px 36px #0000000d}
+html[data-theme] #dashboard .vf-workspace-intro{border-color:var(--t-line)}
+html[data-theme] #dashboard .hero.vf-showcase h1{letter-spacing:-.045em;line-height:1.08}
+html[data-theme] #dashboard .hero.vf-showcase>button.primary{border-radius:9px}
+html[data-theme] #inventory #items>.item,html[data-theme] #dashboard #recent>.item{box-shadow:none;border:1px solid var(--t-line)}
+html[data-theme] #listing .wizard{background:var(--t-surface)}
+html[data-theme] #listing #stage3 .vf-handoff{background:var(--t-field)}
+@media(max-width:800px){
+ .vf-public .editorial{padding:24px 0 28px;gap:22px}
+ .vf-public .editorial h1{font-size:clamp(43px,11.5vw,64px);margin:0 0 14px}
+ .vf-public .editorial>div:first-child{padding:0}
+ .vf-public .editorial .actions{margin-top:17px}
+ .vf-public .product-shot{height:clamp(175px,51vw,290px)}
+ .vf-public .switches{gap:5px}
+ .vf-public .switches button{flex:1 1 auto;padding:7px 8px}
+ .vf-public .studio form{padding:14px}
+}
+@media(max-width:620px){.vf-public .lookbook,.workspace-shell form,html[data-theme] #dashboard .hero.vf-showcase{box-shadow:none}}

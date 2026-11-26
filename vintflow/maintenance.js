@@ -45,7 +45,7 @@ async function unlock(session,allowRefresh=true){
  if(!persist(session)){message("Your browser is blocking session storage. Allow site storage and try again.");return false}
  if(!workspaceRoute){const target=new URL(location.href);target.pathname="/app/";target.hash="";target.searchParams.delete("public");location.assign(target.href);return true}
  try{history.replaceState(null,"",location.pathname+location.search)}catch{}
- window.scrollTo(0,0);document.open();document.write(x.data.html.replace("</head>", '<link rel="stylesheet" href="/workspace-lookbook.css"></head>'));document.close();window.scrollTo(0,0);return true;
+ window.scrollTo(0,0);document.open();document.write(x.data.html.replace("</head>", '<link rel="stylesheet" href="/workspace-lookbook.css"><link rel="stylesheet" href="/ambient.css?v=studio-1"></head>'));document.close();window.scrollTo(0,0);return true;
 }
 function networkError(e){message(e?.name==="AbortError"?"The request timed out. Your account has not been changed. Please try again.":"Unable to connect to the workspace. Check your internet connection and try again.")}
 form.addEventListener("submit",async e=>{

@@ -7,6 +7,8 @@ let busy=false;
 const workspaceRoute=["/app/","/app/index.html"].includes(location.pathname);
 function savedSession(){try{const s=JSON.parse(localStorage.getItem(storageKey)||"null");return typeof s?.access_token==="string"&&s.access_token?s:null}catch{return null}}
 function message(t){msg.textContent=t}
+function captchaToken(){return form.querySelector('input[name="cf-turnstile-response"]')?.value||""}
+function resetHumanCheck(){try{window.turnstile?.reset("#owner-human-check")}catch{}}
 function working(value){busy=value;form.setAttribute("aria-busy",String(value));btn.disabled=value;if(continueButton)continueButton.disabled=value}
 async function request(path,body,token){
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),25000);
@@ -50,8 +52,8 @@ async function unlock(session,allowRefresh=true){
 function networkError(e){message(e?.name==="AbortError"?"The request timed out. Your account has not been changed. Please try again.":"Unable to connect to the workspace. Check your internet connection and try again.")}
 form.addEventListener("submit",async e=>{
  e.preventDefault();if(busy)return;working(true);message("Checking owner access…");
- try{const x=await request("/auth/v1/token?grant_type=password",{email:email.value.trim(),password:password.value});password.value="";if(x.status!==200){message(explanation(x.status,"signin"));return}await unlock(x.data,false)}
- catch(e){networkError(e)}finally{password.value="";working(false)}
+ try{const x=await request("/auth/v1/token?grant_type=password",{email:email.value.trim(),password:password.value,...(captchaToken()?{gotrue_meta_security:{captcha_token:captchaToken()}}:{})});password.value="";if(x.status!==200){message(x.data?.error_code==="captcha_failed"?"Complete the security check and try again.":explanation(x.status,"signin"));return}await unlock(x.data,false)}
+ catch(e){networkError(e)}finally{password.value="";resetHumanCheck();working(false)}
 });
 async function continueSaved(){
  if(busy)return;const session=savedSession();if(!session){message("Sign in with your owner account.");if(continueButton)continueButton.hidden=true;return}

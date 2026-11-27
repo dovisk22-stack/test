@@ -1,22 +1,25 @@
-[hidden]{display:none!important}.workspace-shell{max-width:450px;margin:0 auto;padding:42px 22px 50px}.workspace-shell>.logo{margin-bottom:36px}.workspace-shell form{padding:25px;border:1px solid var(--edge);border-radius:15px;background:var(--panel)}.workspace-shell h1{font-size:28px;letter-spacing:-1px;line-height:1.2;margin:0 0 12px}.workspace-shell p{font-size:14px;line-height:1.7;color:var(--muted)}.workspace-shell label{display:block;font-size:13px;font-weight:600}.workspace-shell input{display:block;width:100%;font:inherit;font-size:16px;min-height:48px;border:1px solid var(--edge);border-radius:9px;background:var(--bg);color:var(--text);padding:12px;margin:7px 0 18px}.workspace-shell button{width:100%;margin:6px 0}.workspace-shell button:disabled{opacity:.6}.workspace-back{display:inline-block;font-size:13px;margin-top:24px}.workspace-loading{padding:20px 0 0}.workspace-loading h1{font-size:24px}.workspace-spinner{display:block;width:25px;height:25px;margin-bottom:20px;border:2px solid var(--edge);border-top-color:var(--accent);border-radius:50%;animation:workspace-spin .8s linear infinite}@keyframes workspace-spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.workspace-spinner{animation:none}}
-
-.workspace-shell :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-.workspace-shell form[aria-busy="true"] button:disabled { cursor: progress; }
-@media (prefers-reduced-motion: no-preference) {
-  .workspace-signin form { animation: signin-settle 240ms ease-out; }
-  @keyframes signin-settle {
-    from { transform: translateY(4px); }
-    to { transform: translateY(0); }
-  }
-  .workspace-shell .cta { transition: transform 140ms ease-out, opacity 140ms ease-out; }
-  .workspace-shell .cta:active:not(:disabled) { transform: scale(.985); }
+[hidden] {display:none!important}
+.workspace-shell {max-width:1000px;margin:0 auto;padding:clamp(20px,4vw,48px) clamp(16px,4vw,40px) max(32px,env(safe-area-inset-bottom))}
+.workspace-shell>.logo {display:inline-flex;min-height:44px;margin-bottom:clamp(16px,3vw,35px)}
+.login-spread {display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:stretch;border:1px solid var(--rule);border-radius:6px;background:var(--sheet);overflow:hidden}
+.login-fields {padding:clamp(20px,4.1vw,48px);align-self:center;min-width:0}
+.login-plate {background:var(--well);position:relative;min-height:330px}
+.login-plate img {position:absolute;width:100%;height:100%;object-fit:cover;inset:0}
+.workspace-kicker {font:600 10.5px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.workspace-shell h1 {font:400 clamp(36px,4.8vw,55px)/1.05 var(--display);letter-spacing:-.025em;margin:8px 0}
+.workspace-shell p {color:var(--soft);font-size:15px;line-height:1.5;overflow-wrap:anywhere}
+.workspace-shell label {display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
+.workspace-shell input {width:100%;min-height:48px;padding:10px 12px;color:var(--type);border:1px solid var(--rim);border-radius:4px;font:400 16px var(--sans);background:var(--field)}
+.workspace-shell .cta {width:100%;margin-top:15px;cursor:pointer}
+.workspace-shell button:disabled {opacity:.7;cursor:progress}
+.workspace-back {display:inline-flex;align-items:center;min-height:44px;margin-top:9px;font-size:14px;color:var(--soft)}
+.workspace-spinner {display:block;width:24px;height:24px;border:2px solid var(--rim);border-top-color:var(--tone);border-radius:50%;animation:workspace-turn 1s linear infinite}
+@keyframes workspace-turn {to{transform:rotate(360deg)}}
+#owner-status {margin:10px 0 0}
+#owner-status:empty {margin:0}
+@media(max-width:650px){
+ .login-spread {grid-template-columns:1fr}
+ .login-plate {min-height:0;height:clamp(76px,19vw,112px);grid-row:1}
+ .login-plate img {object-position:50% 56%}
+ .login-fields {padding:19px}
 }
-
-/* Keep the login route consistent with VintFlow's editorial surfaces. */
-.workspace-shell{max-width:460px;padding:clamp(24px,6vw,48px) 20px 50px}
-.workspace-shell>.logo{margin-bottom:26px;letter-spacing:-.04em}
-.workspace-shell form{padding:clamp(18px,5vw,28px);border-radius:13px;box-shadow:none}
-.workspace-kicker{display:block;color:var(--accent);font-size:10px;font-weight:750;letter-spacing:.13em;margin-bottom:10px}
-.workspace-shell h1{font-size:clamp(28px,7vw,36px);letter-spacing:-.045em;font-weight:740}
-.workspace-shell .cta{min-height:48px;border-radius:9px;font-weight:720}
-.workspace-shell #owner-status{overflow-wrap:anywhere;font-size:13px}

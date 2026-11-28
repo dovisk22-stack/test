@@ -109,3 +109,22 @@ html[data-theme] #skip {position:absolute;z-index:10}
   .sample p {font-size:13px}
   .studio form {grid-template-columns:1fr}
 }
+
+/* Launch pack: editable listing formats and local profit check, using current Atelier theme. */
+.vf-draft-heading{display:grid;gap:2px;margin-bottom:10px}
+.vf-draft-heading small{color:var(--soft);font-size:12px}
+.vf-draft-tones{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:0 0 14px}
+.vf-public .vf-draft-tones button{margin:0;padding:7px 4px;font-size:12px;line-height:1.2;min-height:44px;white-space:normal;cursor:pointer}
+.vf-public .vf-draft-tones button[aria-pressed=true]{background:var(--tone);border-color:var(--tone);color:var(--on-tone)}
+.vf-public #copy-draft{min-height:44px;font-weight:650}
+.vf-profit-studio{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:start;gap:14px clamp(20px,5vw,72px)}
+.vf-profit-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;background:var(--sheet);border:1px solid var(--rule);padding:clamp(15px,2vw,25px);border-radius:5px;min-width:0}
+.vf-profit-form label{font-size:13px;font-weight:650;min-width:0}
+.vf-profit-form input{display:block;width:100%;min-width:0;min-height:46px;margin-top:6px;padding:10px 12px;font:inherit;font-size:16px;background:var(--field);color:var(--text);border:1px solid var(--rim);border-radius:4px}
+.vf-profit-total{display:grid;gap:2px;align-content:center;padding:10px 12px;border:1px solid var(--rule);border-radius:4px;min-width:0}
+.vf-profit-total small{font-size:11px;color:var(--soft)}
+.vf-profit-total strong{font-size:clamp(22px,4vw,32px);line-height:1.1;color:var(--tone);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.vf-profit-total span{font-size:11px;color:var(--soft)}
+.vf-public .vf-profit-note{grid-column:1/-1;margin:0;font-size:12px}
+@media(max-width:780px){.vf-profit-studio{grid-template-columns:1fr}}
+@media(max-width:350px){.vf-profit-form{grid-template-columns:1fr}.vf-draft-tones{gap:4px}.vf-public .vf-draft-tones button{font-size:11px}}

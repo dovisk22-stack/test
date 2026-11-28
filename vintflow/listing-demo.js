@@ -16,6 +16,17 @@
   const copyStatus = document.querySelector('#copy-status');
   let selected = 'jacket';
   let finishTimer;
+  let draftTone = 'seo', draftFacts = null, renderedDraft = '';
+  const toneButtons = [...document.querySelectorAll('[data-draft-tone]')];
+  function formatDraft(facts, tone) {
+    const {item,size,details} = facts;
+    const sizeLine = size ? 'Size / measurements: ' + size : '';
+    if(tone === 'casual') return [item,'', 'Selling my ' + item.charAt(0).toLowerCase() + item.slice(1) + '.', details, sizeLine].filter((v,i)=>v||i===1).join('\n');
+    if(tone === 'fast') return [item,details,sizeLine].filter(Boolean).join('\n');
+    return [item,'',details,sizeLine].filter((v,i)=>v||i===1).join('\n');
+  }
+  function showDraft(tone){draftTone=tone;renderedDraft=formatDraft(draftFacts,tone);output.value=renderedDraft;for(const button of toneButtons)button.setAttribute('aria-pressed',String(button.dataset.draftTone===tone));copyStatus.textContent='';}
+  for(const button of toneButtons)button.addEventListener('click',()=>{if(!draftFacts||button.dataset.draftTone===draftTone)return;if(output.value!==renderedDraft&&!window.confirm('Replace your edited draft with the selected format?'))return;showDraft(button.dataset.draftTone);});
 
   function scanExample(key) {
     selected = key;
@@ -51,6 +62,7 @@
     form.elements.details.value = description;
     result.hidden = true;
     output.value = '';
+    draftFacts = null; renderedDraft = '';
     copyStatus.textContent = '';
     form.elements.namedItem('item').focus();
   });
@@ -60,11 +72,29 @@
     const size = form.elements.size.value.trim();
     const details = form.elements.details.value.trim();
     if (!item || !details) { form.elements[item ? 'details' : 'item'].focus(); return; }
-    output.value = item + '\n\n' + (size ? 'Size / measurements: ' + size + '\n' : '') + details;
+    if(draftFacts && output.value!==renderedDraft && !window.confirm('Replace your edited draft with a new version?'))return;
+    draftFacts={item,size,details};showDraft(draftTone);
     result.hidden = false;
     copyStatus.textContent = '';
     output.focus();
   });
+  function profitCalc(sale,cost,fees){
+    if(![sale,cost,fees].every(v=>typeof v==='number'&&Number.isFinite(v)&&v>=0&&v<=100000&&Math.abs(v*100-Math.round(v*100))<1e-6)||sale<=0)return null;
+    const [s,c,f]=[sale,cost,fees].map(v=>Math.round(v*100));
+    return {net:(s-c-f)/100,margin:(s-c-f)/s*100};
+  }
+  const profitForm=document.querySelector('#vf-public-profit');
+  const currency=new Intl.NumberFormat('en-GB',{style:'currency',currency:'GBP'});
+  function updateProfit(){
+    const fields=['vf-profit-sale','vf-profit-cost','vf-profit-fees'].map(id=>document.getElementById(id));
+    const values=fields.map(f=>f.value.trim()===''?NaN:Number(f.value));
+    const result=profitCalc(...values);
+    document.querySelector('#vf-profit-net').textContent=result?currency.format(result.net):'—';
+    document.querySelector('#vf-profit-margin').textContent=result?result.margin.toFixed(1)+'% of asking price':'Enter valid amounts above.';
+  }
+  profitForm.addEventListener('input',updateProfit);
+  profitForm.addEventListener('submit',e=>{e.preventDefault();updateProfit()});
+  updateProfit();
   document.querySelector('#copy-draft').addEventListener('click', async () => {
     try { await navigator.clipboard.writeText(output.value); copyStatus.textContent = 'Copied'; }
     catch { output.focus(); output.select(); copyStatus.textContent = 'Draft selected. Choose Copy.'; }
